@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="tealinux" version="1.0">
+  <property name="switcher" type="empty">
+    <property name="DevTheme" type="string" value="Ambiance-Blackout-Flat-Red-Pro"/>
+    <property name="DevWindow" type="string" value="Ambiance-Blackout-Flat-Red-Pro"/>
+    <property name="DevIcon" type="string" value="yang"/>
+    <property name="NormalTheme" type="string" value="Bluebird"/>
+    <property name="NormalWindow" type="string" value="Bluebird"/>
+    <property name="NormalIcon" type="string" value="Faenza-Darker"/>
+  </property>
+</channel>
