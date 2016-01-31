@@ -24,7 +24,6 @@ class SwitcherTray(Gtk.StatusIcon):
         self.About = AboutDialog()
 
     def on_icon_clicked(self, event):
-        print("Clicked!")
         self.Menu = Gtk.Menu()
 
         devmode = Gtk.MenuItem()
@@ -40,8 +39,8 @@ class SwitcherTray(Gtk.StatusIcon):
         self.Menu.show_all()
         self.Menu.popup(None,
                         None,
-                        None,
-                        None,
+                        Gtk.StatusIcon.position_menu,  # position function
+                        self,  # data to be passed to position function
                         0,
                         Gtk.get_current_event_time())  # this method must use () or it will error
 
