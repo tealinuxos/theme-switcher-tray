@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from gi.repository import Gtk
 import os
 import dbus
@@ -163,6 +163,7 @@ class SwitcherSettings:
         self.window.set_keep_above(True)
         # self.window.show_all()
 
+
     def new_combo(self, combo_name, get_type_function, current, callback_changed):
         list_store = Gtk.ListStore(int, str)
         themes = get_type_function()  # get all available themes / icon (depend on type)
@@ -289,6 +290,6 @@ class SwitcherSettings:
     def __del__(self):
         print("window deleted")
 
-
-SwitcherTray()
-Gtk.main()
+if __name__ == "__main__":
+    SwitcherTray()
+    Gtk.main()
