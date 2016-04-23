@@ -106,7 +106,7 @@ class AboutDialog(Gtk.AboutDialog):
         self.set_name("Theme Switcher")
         self.set_logo_icon_name("theme-switcher-tray")
         self.set_icon_name("theme-switcher-tray")
-        self.set_version("0.0.1")
+        self.set_version("0.2.5")
         self.set_authors(["Nurul Irfan"])
         self.set_artists(["Billy F.P.S"])
         self.set_program_name("Theme Switcher")
