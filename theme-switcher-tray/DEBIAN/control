@@ -1,0 +1,9 @@
+Package: theme-switcher-tray
+Section: xfce
+Version: 0.2.5
+Architecture: all
+Depends: xfconf (>=4.10.0), xfce4-settings (>=4.10.0), python3 (>=3.4)
+Priority: extra
+Maintainer: nurul irfan <irfanlongstride@gmail.com>
+Description: Quick way to switch favourite themes
+ Created for TealinuxOS and Xubuntu

@@ -1,4 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import os
 import dbus
@@ -14,7 +16,7 @@ iface = dbus.Interface(remote_object, "org.xfce.Xfconf")
 class SwitcherTray(Gtk.StatusIcon):
     def __init__(self):
         Gtk.StatusIcon.__init__(self)
-        self.set_from_icon_name("emblem-system-symbolic")
+        self.set_from_icon_name("theme-switcher")
         self.set_visible(True)
         self.set_has_tooltip(True)
         self.set_tooltip_text("Quick switch theme")
@@ -24,7 +26,6 @@ class SwitcherTray(Gtk.StatusIcon):
         self.About = AboutDialog()
 
     def on_icon_clicked(self, event):
-        print("Clicked!")
         self.Menu = Gtk.Menu()
 
         devmode = Gtk.MenuItem()
@@ -40,8 +41,8 @@ class SwitcherTray(Gtk.StatusIcon):
         self.Menu.show_all()
         self.Menu.popup(None,
                         None,
-                        None,
-                        None,
+                        Gtk.StatusIcon.position_menu,  # position function
+                        self,  # data to be passed to position function
                         0,
                         Gtk.get_current_event_time())  # this method must use () or it will error
 
@@ -59,10 +60,15 @@ class SwitcherTray(Gtk.StatusIcon):
         self.Menu.append(about)
         self.Menu.show_all()
 
-        def pos(menu, icon):
-            return Gtk.StatusIcon.position_menu(menu, icon)
+        def pos(menu, icon, *args):
+            return Gtk.StatusIcon.position_menu(menu, icon, icon, self)
 
-        self.Menu.popup(None, None, pos, self, button, time)
+        def pos2(menu, icon):
+            return Gtk.StatusIcon.position_menu(menu, icon)
+        try:
+            self.Menu.popup(None, None, pos, self, button, time)
+        except TypeError:
+            self.Menu.popup(None, None, pos2, self, button, time)
 
     @staticmethod
     def dev_clicked(user_data):
@@ -98,10 +104,14 @@ class AboutDialog(Gtk.AboutDialog):
         Gtk.AboutDialog.__init__(self)
         self.set_destroy_with_parent(True)
         self.set_name("Theme Switcher")
+        self.set_logo_icon_name("theme-switcher")
+        self.set_icon_name("theme-switcher")
         self.set_version("0.0.1")
         self.set_authors(["Nurul Irfan"])
+        self.set_artists(["Billy F.P.S"])
         self.set_program_name("Theme Switcher")
-        self.set_copyright("CC-BY-SA")
+        self.set_license_type(Gtk.License.GPL_3_0)
+        # self.set_wrap_license(False)
         self.set_comments("Quick way to switch theme")
         self.connect("delete-event", self.on_window_destroy)
         self.connect("response", self.on_window_destroy)  # when 'close' button clicked
@@ -112,7 +122,7 @@ class AboutDialog(Gtk.AboutDialog):
 
 
 class SwitcherSettings:
-    path = "switcher.ui"
+    path = "/usr/share/theme-switcher/switcher.ui"  # must be absolute path
 
     def __init__(self):
         self.builder = Gtk.Builder()
@@ -284,12 +294,13 @@ class SwitcherSettings:
         self.window.hide()
 
     def on_window_destroy(self, *args):
+
         self.window.hide()
         return True  # if not returned True, all children will be destroyed
 
     def __del__(self):
         print("window deleted")
 
-
-SwitcherTray()
-Gtk.main()
+if __name__ == "__main__":
+    SwitcherTray()
+    Gtk.main()
