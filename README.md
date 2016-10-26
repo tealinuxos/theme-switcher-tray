@@ -2,5 +2,4 @@
 Change themes using tray icon.
 
 
-translate and improve this, please:
-Semua orang punya tema favorit yang digunakan di OS mereka. Namun banyak dari mereka yang punya lebih dari satu tema favorit. misalnya seorang programmer waktu coding suka pakai tema yang gelap, tapi untuk urusan lain suka tema yang lain. akan lebih mudah jika bisa mengganti tema dalam sekejap dengan Tray Icon di taskbar. Karena itulah project ini diciptakan.
+Everyone have Favourite Themes that used for their OS. But most of them have more than one favourite theme. For example a programmer who like to code on dark theme, but when he/she doing other thing he/she like using other theme. It will be easier tp change theme instantly with tray icon in taskbar, and that is why this project is created
